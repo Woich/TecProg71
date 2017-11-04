@@ -16,43 +16,38 @@ import utfpr.ct.dainf.if62c.pratica.Time;
 public class Pratica71 {
     public static void main(String[] args) {
         Time time1 = new Time();
-        Scanner scan = new Scanner(System.in);
-        int qtdJogadores;
-        int num;
-        int pos;
-        String lixo;
+        Scanner teclado = new Scanner(System.in);
+        int qtJogadores, num, pos;
         String nome;
         
-        System.out.println("Quantos jogadores serão?");
+        System.out.println("Digite a quantidade de jogadores:");
         
-        if(scan.hasNextInt()){
-            qtdJogadores = scan.nextInt();
+        if(teclado.hasNextInt()) {
+            qtJogadores = teclado.nextInt();
             
-            for(int i=0; i<qtdJogadores; i++) {
-                System.out.println("Qual o numero");
-                    if(scan.hasNextInt()){ 
-                        num = scan.nextInt();
-                    }
-                    else{
-                        num = i+1;
-                        lixo = scan.next();
-                    }
-                    
-                    System.out.println("Qual o nome?");
-                    nome = scan.next();
+            for(int i=0; i<qtJogadores; i++) {
+                System.out.println("Informe o numero");
+                    if(teclado.hasNextInt()) 
+                        num = teclado.nextInt();
+                    else
+                        num = 0;
+                                               
+                    System.out.println("Informe o nome");
+                    nome = teclado.next();
+           
                     time1.addJogador(new Jogador(num, nome));
             }
-        }
+        }       
         
-        ArrayList<Jogador> listaJogadores = time1.ordena(new JogadorComparator(true, true, true));
-        System.out.println(listaJogadores);
-        num = 1;
+        ArrayList<Jogador> lista = time1.ordena(new JogadorComparator(true, true, true));
         
-        while(num != 0){
-            System.out.println("Informe o numero");
+        System.out.println(lista);
+
+        do{
+                System.out.println("Informe o numero");
                 
-                if(scan.hasNextInt())
-                    num = scan.nextInt();
+                if(teclado.hasNextInt())
+                    num = teclado.nextInt();
                 else
                     num = 0;
                     
@@ -60,21 +55,21 @@ public class Pratica71 {
                     break;
                 
                 System.out.println("Informe o nome");
-                    nome = scan.next();
+                    nome = teclado.next();
                     
                 Jogador novo = new Jogador(num, nome);
                 
-                pos = Collections.binarySearch(listaJogadores, novo);
+                pos = Collections.binarySearch(lista, novo);
                 
                 if(pos>=0) {
-                    listaJogadores.set(pos, novo);
+                    lista.set(pos, novo);
                 }else{
-                    listaJogadores.add(pos*-1-1, novo);
+                    lista.add(pos*-1-1, novo);
                 }
-        }
+                
+        } while(num != 0);
         
-        System.out.println(listaJogadores);
-        
+        System.out.println(lista);
     }
     
 }
