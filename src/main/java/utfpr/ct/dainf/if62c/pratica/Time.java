@@ -15,19 +15,18 @@ import java.util.List;
  * @author woich
  */
 public class Time {
-    private final HashMap<String, Jogador> jogadores = new HashMap<>();
+    private final ArrayList<Jogador> jogadores = new ArrayList<>();
 
-    public HashMap<String, Jogador> getJogadores() {
+    public ArrayList<Jogador> getJogadores() {
         return jogadores;
     }
     
-    public void addJogador(String posicao, Jogador jogador) {
-        jogadores.put(posicao, jogador);
+    public void addJogador(Jogador jogador) {
+        jogadores.add(jogador);
     }
     
-    public List<Jogador> ordena(JogadorComparator comparator) {
-        List<Jogador> lista = new ArrayList<>(jogadores.values());
-        Collections.sort(lista, comparator);
-        return lista;
+    public ArrayList<Jogador> ordena(JogadorComparator comparator) {
+        Collections.sort(jogadores, comparator);
+        return jogadores;
     }
 }
